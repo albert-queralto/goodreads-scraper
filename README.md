@@ -1,7 +1,7 @@
 # Goodreads scraping tool
 This tool obtains metadata information from *Best Books Ever* list on [Goodreads.com](https://www.goodreads.com/) and saves the information to a CSV file.
 
-The idea was to practice scraping and to learn how to use the [Selenium](https://selenium-python.readthedocs.io/) and [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/) libraries.
+This tool was intended as a practice for webscraping and to learn how to use the [Selenium](https://selenium-python.readthedocs.io/) and [Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/) libraries.
 
 An *object-oriented-programming* approach was used to implement the scraping tool.
 
