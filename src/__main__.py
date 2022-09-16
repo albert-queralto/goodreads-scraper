@@ -13,3 +13,14 @@ class BookScraperSearch(unittest.TestCase):
         self.base_url = 'https://www.goodreads.com/'
         
     def web_scraper(self):
+        page_navigator = utils.NavigationFunctions(driver=self.driver, base_url=self.base_url)
+        page_navigator.open_chrome_session()
+        
+    
+    
+    
+    def close_driver(self):
+        self.driver.close()
+        
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
