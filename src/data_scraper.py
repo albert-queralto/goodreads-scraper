@@ -19,11 +19,11 @@ class BestBooksEverPageScraper(BasePage):
         while True:
             try:
                 self.get_best_books_info(self.best_books_ever)
+                print(self.best_books_ever)
                 self.driver.implicitly_wait(5)
             except Exception as e:
                 print(e)
                 break
-        print(self.best_books_ever)
         return self.best_books_ever
     
     def get_best_books_info(self, dictionary: dict):
@@ -41,8 +41,12 @@ class BestBooksEverPageScraper(BasePage):
                     dictionary['stars'].append(stars)
                     dictionary['ratings'].append(ratings)
                     
-                    # dictionary['score'].append()
-                    # dictionary['people_voted'].append()
+                    score = StringProcessing.get_scores(str(book.find(BestBooksEverPointers.SCORE[0], text=re.compile(BestBooksEverPointers.SCORE[1]))))
+                    dictionary['score'].append(score)
+                    
+                    votes = StringProcessing.get_votes(str(book.find(BestBooksEverPointers.VOTES[0], text=re.compile(BestBooksEverPointers.VOTES[1]))))
+                    dictionary['people_voted'].append(votes)
+                    
                 except Exception as e:
                     print(e)
                     continue
