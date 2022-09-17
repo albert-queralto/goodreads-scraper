@@ -2,7 +2,7 @@
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, WebDriverException, NoSuchElementException
 
 from font_code_pointers import *
 
@@ -37,3 +37,20 @@ class Navigation(BasePage):
     def navigate_best_books_ever(self):
         link = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(ListopiaPointers.BEST_BOOKS_EVER))
         self.driver.execute_script("arguments[0].click();", link)
+        
+    def navigate_next_page(self):
+        try:
+            next_page = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(BestBooksEverPointers.NEXT_PAGE))
+            self.driver.execute_script("arguments[0].click();", next_page)
+            return True
+        except WebDriverException as web_driver_exception:
+            print(web_driver_exception)
+            print('There was an issue going to the next page.')
+            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(BestBooksEverPointers.NEXT_PAGE_DISABLED))
+            print('Next page button is disabled. Last page reached.')
+            return False
+        except NoSuchElementException as presence_element_exception:
+            print(presence_element_exception)
+            print("Another exception occurred. Retrying to go to the next page.")
+            self.driver.implicitly_wait(5)
+            return self.navigate_next_page()
