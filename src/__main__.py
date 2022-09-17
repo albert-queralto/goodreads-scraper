@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
 from navigation import *
+from data_scraper import *
 
 class BookScraping(unittest.TestCase):
     
@@ -18,6 +19,9 @@ class BookScraping(unittest.TestCase):
         page_navigator.navigate_to_lists_page()
         page_navigator.click_x_button()
         page_navigator.navigate_best_books_ever()
+        
+        best_books_ever_page = BestBooksEverPageScraper(driver=self.driver, base_url=self.base_url)
+        best_books_ever_page.get_all_book_pages()
         
         
     def tearDown(self):
