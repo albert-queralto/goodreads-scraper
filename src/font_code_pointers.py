@@ -7,3 +7,9 @@ class MainPagePointers(object):
 class ListopiaPointers(object):
     X_BUTTON = (By.CLASS_NAME, 'gr-iconButton')
     BEST_BOOKS_EVER = (By.LINK_TEXT, 'Best Books Ever')
+    
+class BestBooksEverPointers(object):
+    POSITION_ORDER = ('td', 'number')
+    BOOK_TITLE = ('a', 'bookTitle')
+    AUTHOR_NAME = ('a', 'authorName')
+    STARS_RATINGS = ('span', 'minirating')
