@@ -13,3 +13,6 @@ class BestBooksEverPointers(object):
     BOOK_TITLE = ('a', 'bookTitle')
     AUTHOR_NAME = ('a', 'authorName')
     STARS_RATINGS = ('span', 'minirating')
+    SCORE = ('a', 'score:')
+    VOTES = ('a', 'people voted')
+    
