@@ -15,4 +15,5 @@ class BestBooksEverPointers(object):
     STARS_RATINGS = ('span', 'minirating')
     SCORE = ('a', 'score:')
     VOTES = ('a', 'people voted')
-    
+    NEXT_PAGE = (By.CSS_SELECTOR, '#all_votes > div.pagination > a.next_page')
+    NEXT_PAGE_DISABLED = (By.CSS_SELECTOR, '#all_votes > div.pagination > span.next_page.disabled')
