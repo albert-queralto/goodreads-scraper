@@ -21,6 +21,8 @@ class BestBooksEverPageScraper(BasePage):
                 self.get_best_books_info(self.best_books_ever)
                 print(self.best_books_ever)
                 self.driver.implicitly_wait(5)
+                if Navigation.navigate_next_page(self) == False:
+                    break
             except Exception as e:
                 print(e)
                 break
