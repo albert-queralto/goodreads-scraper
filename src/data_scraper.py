@@ -12,14 +12,13 @@ class BestBooksEverPageScraper(BasePage):
         
         self.best_books_ever = {
                                 'position':[], 'title':[], 'author':[], 'book_id':[], 'stars':[], 'ratings':[], 'score':[],
-                                'people_voted':[]
+                                'people_voted':[], 'description': [], 'genres': [], 'pages': [], 'publication_year': []
                                 }
         
     def get_all_book_pages(self):
         while True:
             try:
                 self.get_best_books_info(self.best_books_ever)
-                print(self.best_books_ever)
                 self.driver.implicitly_wait(5)
                 if Navigation.navigate_next_page(self) == False:
                     break
@@ -53,6 +52,34 @@ class BestBooksEverPageScraper(BasePage):
                     print(e)
                     continue
             return dictionary
+        else:
+            print('Soup object is None')
+            return None
+    
+    def get_all_book_details(self):
+        for idx, book_id in enumerate(self.best_books_ever['book_id']):
+            if idx <= len(self.best_books_ever['book_id']):
+                try:
+                    Navigation.navigate_book_pages(self, book_id)
+                    self.get_book_additional_info()
+                    self.driver.implicitly_wait(5)
+                except Exception as e:
+                    print(e)
+                    continue
+            else:
+                break
+        return self.best_books_ever
+    
+    def get_book_additional_info(self):
+        self.driver.implicitly_wait(5)
+        print(self.driver.current_url)
+        soup = BeautifulSoup(self.driver.page_source, "html.parser")
+        
+        if soup is not None:
+            self.best_books_ever['description'].append(StringProcessing.get_description(soup))
+            self.best_books_ever['genres'].append(StringProcessing.get_genres(soup))
+            self.best_books_ever['pages'].append(StringProcessing.get_pages(soup))
+            self.best_books_ever['publication_year'].append(StringProcessing.get_publication_year(soup))
         else:
             print('Soup object is None')
             return None
