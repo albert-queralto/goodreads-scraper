@@ -23,6 +23,10 @@ class BookScraping(unittest.TestCase):
         best_books_ever_page = BestBooksEverPageScraper(driver=self.driver, base_url=self.base_url)
         best_books_ever_page.get_all_book_pages()
         
+        best_books = best_books_ever_page.get_all_book_details()
+        
+        data_saver = SaveUtils(filename='best_books.csv', dictionary=best_books)
+        data_saver.save_data()
         
     def tearDown(self):
         self.driver.close()
