@@ -17,3 +17,10 @@ class BestBooksEverPointers(object):
     VOTES = ('a', 'people voted')
     NEXT_PAGE = (By.CSS_SELECTOR, '#all_votes > div.pagination > a.next_page')
     NEXT_PAGE_DISABLED = (By.CSS_SELECTOR, '#all_votes > div.pagination > span.next_page.disabled')
+
+
+class BookPagePointers(object):
+    BOOK_DESCRIPTION_DIV = ('div', 'BookPageMetadataSection__description')
+    BOOK_DESCRIPTION_SPAN = ('span', 'Formatted')
+    PAGES = ('p', 'data-testid', 'pagesFormat')
+    PUBLICATION_YEAR = ('p', 'data-testid', 'publicationInfo')
