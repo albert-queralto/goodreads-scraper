@@ -1,5 +1,7 @@
 import re
+from sqlite3 import connect
 from bs4 import BeautifulSoup
+from requests_html import HTMLSession
 
 from font_code_pointers import *
 from navigation import *
@@ -73,7 +75,12 @@ class BestBooksEverPageScraper(BasePage):
     def get_book_additional_info(self):
         self.driver.implicitly_wait(5)
         print(self.driver.current_url)
-        soup = BeautifulSoup(self.driver.page_source, "html.parser")
+        
+        session = HTMLSession()
+        connect_page = session.get(self.driver.current_url)
+        connect_page.html.render()
+        
+        soup = BeautifulSoup(connect_page.html.html, "html.parser")
         
         if soup is not None:
             self.best_books_ever['description'].append(StringProcessing.get_description(soup))

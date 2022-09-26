@@ -45,13 +45,14 @@ class Navigation(BasePage):
             return True
         except WebDriverException:
             print('There was an issue going to the next page.')
-            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(BestBooksEverPointers.NEXT_PAGE_DISABLED))
-            print('Next page button is disabled. Last page reached.')
-            return False
-        except NoSuchElementException:
-            print("Another exception occurred. Retrying to go to the next page.")
-            self.driver.implicitly_wait(5)
-            return self.navigate_next_page()
+            try:
+                WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(BestBooksEverPointers.NEXT_PAGE_DISABLED))
+                print('Next page button is disabled. Last page reached.')
+                return False
+            except NoSuchElementException:
+                print("Another exception occurred. Retrying to go to the next page.")
+                self.driver.implicitly_wait(5)
+                return self.navigate_next_page()
         
     def navigate_book_pages(self, book_id):
         try:
