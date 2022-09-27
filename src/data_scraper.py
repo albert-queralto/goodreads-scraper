@@ -78,7 +78,7 @@ class BestBooksEverPageScraper(BasePage):
         
         session = HTMLSession()
         connect_page = session.get(self.driver.current_url)
-        connect_page.html.render()
+        connect_page.html.render(sleep=5)
         
         soup = BeautifulSoup(connect_page.html.html, "html.parser")
         
